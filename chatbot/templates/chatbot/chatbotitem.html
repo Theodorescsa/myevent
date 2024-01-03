@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+        <script src="https://cdn.ckeditor.com/4.16.2/standard/ckeditor.js"></script>
+    </head>
+    <body>
+chatbot page
+{% comment %} <a href="{% url 'home:list' %}">Back to menu</a> {% endcomment %}
+<hr>
+<section class="gradient-custom">
+    <div class="container py-5">
+  
+      <div class="row">
+  
+
+        <div class="row">
+            {% for item in chatbot_list %}
+            <div class="col-md-6 col-lg-7 col-xl-7">
+        
+                <ul class="list-unstyled text-white">
+                    <li class="d-flex justify-content-between mb-4">
+                        <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp" alt="avatar"
+                            class="rounded-circle d-flex align-self-start me-3 shadow-1-strong" width="60">
+                        <div class="card mask-custom">
+                            <div class="card-header d-flex justify-content-between p-3"
+                                style="border-bottom: 1px solid rgba(255,255,255,.3);">
+                                <p class="fw-bold mb-0">{{request.user.username}}</p>
+                                <p class="text-light small mb-0" style="color: black;"><i class="far fa-clock"></i> 12 mins ago</p>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">
+                                    {{ item.question }}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                    <li class="d-flex justify-content-between mb-4">
+                        <div class="card mask-custom w-100">
+                            <div class="card-header d-flex justify-content-between p-3"
+                                style="border-bottom: 1px solid rgba(255,255,255,.3);">
+                                <p class="fw-bold mb-0">Chatbot</p>
+                                <p class="text-light small mb-0"><i class="far fa-clock"></i> 13 mins ago</p>
+                            </div>
+                            <div class="card-body">
+                                <p class="mb-0">
+                                    {{ item.answer }}
+                                </p>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+        
+            </div>
+            {% endfor %}
+        </div>
+        
+
+            </li>
+
+            <form action="" method="post">
+                {% csrf_token %}
+                <li class="mb-3">
+                    <div class="form-outline form-white">
+                      <textarea class="form-control" id="textAreaExample3" rows="4" name="question"></textarea>
+                      <label class="form-label" for="textAreaExample3">Message</label>
+                    </div>
+                  </li>
+                  <button type="submit" class="btn btn-light btn-lg btn-rounded float-end">Send</button>
+     
+            </form>
+         
+          </ul>
+  
+        </div>
+  
+      </div>
+  
+    </div>
+  </section>
+
+  <script src="" async defer></script>
+</body>
+</html>

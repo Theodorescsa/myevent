@@ -1,0 +1,13 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<div class="contact-us">
+    <form>
+        <input placeholder="Name" type="text" required="">
+        <input placeholder="Email" type="email" name="customerEmail" required="">
+        <input placeholder="Phone" type="tel" name="customerPhone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required="">
+        <button type="submit">SIGN UP</button>
+    </form>
+      
+  </div>
+
+{% endblock content %}

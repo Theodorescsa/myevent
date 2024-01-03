@@ -1,0 +1,50 @@
+{% extends "home/base.html" %}
+{% block content %}
+<!--Pricing Tables-->
+
+<section id="pricing" class="secondary-color text-center scrollto clearfix ">
+    <div class="row clearfix">
+
+        <div class="section-heading" style="  justify-content: space-between;align-items: center;">
+            <h3>YOUR CHOICE</h3>
+            <form class="search-form" action="" method="get" style="align-items: center;">
+                {% csrf_token %}
+                <input type="text" name="keyword" value = "{{keyword}}" placeholder="Tìm kiếm" style="    padding: 8px;                background-color: gainsboro;
+
+                border: 1px solid #ccc;
+                border-radius: 4px;
+                margin-right: 8px;">
+                <button type="submit" style="  padding: 8px 12px;
+                background-color: #007bff;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;"><i class="fa fa-search"></i></button>
+            </form>
+        </div>
+        
+            {% for item in events %}
+            <div class="pricing-block col-4 wow fadeInUp" data-wow-delay="0.4s">
+                <div class="pricing-block-content">
+                    <h3>{{item.name}}</h3>
+                    <p class="pricing-sub">{{item.description}}</p>
+                    <div class="pricing">
+                        <p>Topic:{{item.topic}}</p>
+                        <p>Time:{{item.time}}</p>
+                        
+                        <p>Address:{{item.address}}</p>
+                    </div>
+                    <ul>
+                       <li>Thành viên tham gia:</li>
+                    </ul>
+                    <a href="{% url 'home:detail' item.id %}" class="button">Xem ngay</a>
+                </div>
+            </div>
+            {% endfor %}
+  
+
+    </div>
+</section>
+<!--End of Pricing Tables-->
+
+{% endblock content %}

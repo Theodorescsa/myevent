@@ -1,0 +1,174 @@
+{% extends "home/base.html" %}
+{% block content %}
+{% load static %}
+  <!--Gallery-->
+  <aside id="gallery" class="row text-center scrollto clearfix" data-featherlight-gallery
+  data-featherlight-filter="a">
+{% comment %} <style style="width: 950px;height: 531px;"></style> {% endcomment %}
+<div id="banner-content" class="row clearfix" style="margin-top: 200px;">
+
+    <div class="col-38">
+
+        <div class="section-heading">
+            <h3><p>"Một vài bức ảnh của các sự kiện đang diễn ra"</p></h3>
+        </div>
+
+
+    </div>
+
+</div><!--End of Row-->
+
+{% for item in events %}
+    {% if item.image %}
+        <a href="{{ item.image.url }}" data-featherlight="image" class="col-3 wow fadeIn"
+        data-wow-delay="0.1s" style="width: 300px;height: 300px;">
+            <img src="{{ item.image.url }}" style="width: 300px;height: 300px;border-radius: 10px;" alt="Landing Page"/>
+        </a>
+    {% endif %}
+{% endfor %}
+  </aside>
+  <!--End of Gallery-->
+
+
+  <!--Content Section-->
+  <div id="services" class="scrollto clearfix">
+
+      <div class="row no-padding-bottom clearfix">
+
+
+          <!--Content Left Side-->
+          <div class="col-3">
+              <!--User Testimonial-->
+              <blockquote class="testimonial text-right bigtest">
+                  <q>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                      labore
+                      et dolore magna aliqua</q>
+                  <footer>— John Doe, Happy Customer</footer>
+              </blockquote>
+              <!-- End of Testimonial-->
+
+          </div>
+          <!--End Content Left Side-->
+
+          <!--Content of the Right Side-->
+          <div class="col-3">
+              <div class="section-heading">
+                  <h3>BELIEVING</h3>
+                  <h2 class="section-title">Focusing On What Matters Most</h2>
+                  <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam!</p>
+              </div>
+              <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium,
+                  totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae
+                  dicta sunt explicabo.
+              </p>
+              <p>
+                  Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia
+                  consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt.
+                  Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet!
+              </p>
+              <!-- Just replace the Video ID "UYJ5IjBRlW8" with the ID of your video on YouTube (Found within the URL) -->
+              <a href="#" data-videoid="UYJ5IjBRlW8" data-videosite="youtube" class="button video link-lightbox">
+                  WATCH VIDEO <i class="fa fa-play" aria-hidden="true"></i>
+              </a>
+          </div>
+          <!--End Content Right Side-->
+
+          <div class="col-3">
+              <img src="{% static 'images/Thiết kế chưa có tên.png' %}" alt="Dancer"/>
+          </div>
+
+      </div>
+
+
+  </div>
+  <!--End of Content Section-->
+    <!--Testimonials-->
+    <aside id="testimonials" class="scrollto text-center" data-enllax-ratio=".2">
+
+        <div class="row clearfix">
+
+            <div class="section-heading">
+                <h3>FEEDBACK</h3>
+                <h2 class="section-title">What our customers are saying</h2>
+            </div>
+
+            <!--User Testimonial-->
+            <blockquote class="col-3 testimonial classic">
+                <img src="{% static 'images/Screenshot_37.png' %}" alt="User"/>
+                <q>Nói với trái tim mình rằng nỗi sợ đau đớn còn tồi tệ hơn chính đau đớn.
+                     Và rằng không trái tim nào phải khổ ải tìm kiếm những giấc mơ,
+                    vì mỗi một giây tìm kiếm là cuộc gặp gỡ người yêu cùng sự vĩnh cửu</q>
+                <footer>Nguyễn Đình Thái - Happy Customer</footer>
+            </blockquote>
+            <!-- End of Testimonial-->
+
+
+        </div>
+
+    </aside>
+    <!--End of Testimonials-->
+
+      <!--Clients-->
+      <section id="clients" class="scrollto clearfix">
+        <div class="row clearfix">
+
+            <div class="col-3">
+
+                <div class="section-heading">
+                    <h3>TRUST</h3>
+                    <h2 class="section-title">Companies who use our services</h2>
+                    <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                        eiusmod
+                        tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam!</p>
+                </div>
+
+            </div>
+
+            <div class="col-2-3">
+
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+
+                <a href="#" class="col-3">
+                    <img src="{% static 'images/company-images/company-logo1.png' %}" alt="Company"/>
+                    <div class="client-overlay"><span>Tree</span></div>
+                </a>
+
+            </div>
+
+        </div>
+    </section>
+    <!--End of Clients-->
+    </main>
+{% endblock content %}
