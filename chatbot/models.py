@@ -16,7 +16,9 @@ class ChatbotModel(models.Model):
 class ChatbotItemModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(EventModel,on_delete = models.PROTECT,null = True)
-    question = models.CharField(max_length = 2000)
+    order = models.CharField(max_length = 2000, null = True)
+
+    question = models.CharField(max_length = 2000, null = True)
     answer = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(null = True)
