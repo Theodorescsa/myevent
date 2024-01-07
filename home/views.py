@@ -34,7 +34,13 @@ def list_events(request):
             # print(f"{item.event.name} đang có {item.event.totalpeople} đang tham gia")
             item.save()
     print(list_dict)
+    if list_dict == []:
+        for item in list_event_id:
+            event = EventModel.objects.get(id=item)
+            event.totalpeople = 0
+            event.save()
     for item in list_dict:
+        
         event_id = list(item.keys())[0]
         total_people = item[event_id]
 
@@ -94,6 +100,13 @@ def add(request):
         form = EventFormModel(request.POST, request.FILES)
         if form.is_valid():
             form.save()
+            # new_event = form.save(commit=False)
+            # new_event.user = user
+            # subscribe, created = SubcribeModel.objects.get_or_create(
+            #     user=user,
+            #     event=new_event,
+            #     status=1,
+            # )
             return redirect("home:list_events")
     context  = {
         'form':form
@@ -152,14 +165,24 @@ def unsubcribe(request, id):
     user = User.objects.get(username=request.user.username)
     event = EventModel.objects.get(id=id)
     if request.method == "POST":
-        status = 0
-        model, created = SubcribeModel.objects.get_or_create(
+        model = SubcribeModel.objects.get(
             user=user,
-            event=event,
-            defaults={'status': status}
+            event=event,   
+            status = 1   
         )
-        if not created:
+        try:
+            status = 0
+
             model.status = status
             model.save()
+        except SubcribeModel.DoesNotExist:
+            status = 0
+
+            model, created = SubcribeModel.objects.get_or_create(
+                user=user,
+                event=event,      
+                status=status
+            )
+  
         return redirect("home:subcribed")
 
