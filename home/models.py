@@ -8,7 +8,7 @@ class EventModel(models.Model):
     description = models.TextField()
     date = models.DateField(null = True)
     time = models.TimeField()
-    
+    totalpeople = models.IntegerField(null = True)
     deadlinedate = models.DateField(null = True)
     deadlinetime = models.TimeField(null = True)
     address = models.CharField(max_length = 1000)

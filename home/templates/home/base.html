@@ -126,10 +126,12 @@
                             </li>
                             {% endif %}
                        
-            
+                            {% if request.user.is_superuser %}
                             <li>
                                 <a href="http://127.0.0.1:8000/admin/" target="_blank">Admin</a>
                             </li>
+                            {% endif %}
+                         
                             <li>
                                 <a href="{% url 'home:list_events' %}">List Events</a>
                             </li>

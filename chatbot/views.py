@@ -60,7 +60,7 @@ def chatbotitem(request,id):
     time = str(event.time)
     deadlinedate = str(event.deadlinedate)
     deadlinetime = str(event.deadlinetime)
-    list_content = [f"Tên người dùng:{request.user.username}\n",f"Tên sự kiện:{event.name}\n",f"Mô tả:{event.description}\n",f"Thời gian bắt đầu:{date},{time}\n",f"Thời gian kết thúc:{deadlinedate},{deadlinetime}\n",f"Địa chỉ:{event.address}\n",f"Chủ đề:{event.topic}\n",f"Người chủ trì:{event.leader}\n"]
+    list_content = [f"Tên người dùng:{request.user.username}\n",f"Tên sự kiện:{event.name}\n",f"Mô tả:{event.description}\n",f"Thời gian bắt đầu:{date},{time}\n",f"Thời gian kết thúc:{deadlinedate},{deadlinetime}\n",f"Địa chỉ:{event.address}\n",f"Chủ đề:{event.topic}\n",f"Người chủ trì:{event.leader}\n",f"Số lượng người tham gia:{event.totalpeople}\n"]
     list_content = [str(x) if x is not None else '' for x in list_content]
     order = "-".join(list_content)
     openai.api_key = API_KEY

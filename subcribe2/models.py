@@ -5,7 +5,6 @@ from home.models import EventModel
 class SubcribeModel(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     event = models.ForeignKey(EventModel,on_delete = models.PROTECT,null=True)
-    totalevent = models.IntegerField(null = True)
     status = models.BooleanField(default = False)
     
     def __str__(self):

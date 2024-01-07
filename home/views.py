@@ -15,13 +15,40 @@ def list_events(request):
     today = datetime.now()
     current_time = today.time()
     current_date = today.date()
+    subcribe = SubcribeModel.objects.all()
+    list_event_id = []
+    list_dict = []
+    # chạy vòng lặp lấy id của các event đang có
+    for item in events:
+        list_event_id.append(item.id)
 
+    # chạy vòng lặp đếm số lượng 
+    for num_id in list_event_id:
+        event_total = SubcribeModel.objects.filter(event__id=num_id,status = 1)
+        total = event_total.count()
+        for item in event_total:
+            item.event.totalpeople = total
+            list_dict.append({item.event.id: item.event.totalpeople})
+
+            # print(f"{item.event.name} đang có {item.event.totalpeople} đang tham gia")
+            item.save()
+    print(list_dict)
+    for item in list_dict:
+        event_id = list(item.keys())[0]
+        total_people = item[event_id]
+
+        # Lấy sự kiện từ cơ sở dữ liệu và cập nhật tổng số người tham gia
+        event = EventModel.objects.get(id=event_id)
+        event.totalpeople = total_people
+        event.save()
+ 
+
+    # thời gian sự kiện kết thúc
     for item in events:
         if item.deadlinedate == current_date and item.deadlinetime < current_time:
-            print(item.name)
             item.is_completed = True
             item.save()
-        print(item.deadlinedate)
+    # tìm kiếm 
     if keyword:
         events = EventModel.objects.filter(
             Q(name__icontains = keyword)
@@ -79,7 +106,7 @@ def edit(request,id):
         form = EventFormModel(request.POST, request.FILES,instance=model)
         if form.is_valid():
             form.save()
-            return HttpResponse("Dang ki thanh cong")
+            return redirect('home:detail',id)
 
     context = {
         'form':form,
@@ -112,8 +139,11 @@ def didsubcribed(request):
         user=user,
         status=1,
     )
+    total = events.count()
+    print(total)
     context = {
-        'events':events
+        'events':events,
+        'total':total
     }
     return render(request,"home/didsubcribed.html",context)
 @login_required(login_url=settings.LOGIN_URL)
@@ -121,7 +151,7 @@ def unsubcribe(request, id):
     user = User.objects.get(username=request.user.username)
     event = EventModel.objects.get(id=id)
     if request.method == "POST":
-        status = False
+        status = 0
         model, created = SubcribeModel.objects.get_or_create(
             user=user,
             event=event,
