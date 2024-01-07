@@ -25,6 +25,7 @@ def list_events(request):
     # chạy vòng lặp đếm số lượng 
     for num_id in list_event_id:
         event_total = SubcribeModel.objects.filter(event__id=num_id,status = 1)
+        
         total = event_total.count()
         for item in event_total:
             item.event.totalpeople = total
