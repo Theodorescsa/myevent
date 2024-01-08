@@ -16,4 +16,4 @@ class EventModel(models.Model):
     image = models.ImageField(upload_to="images/",null = True)
     is_completed = models.BooleanField(default = False, null = True)
     def __str__(self):
-        return self.name
+        return str(self.name) if self.name is not None else ""

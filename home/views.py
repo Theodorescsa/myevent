@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.conf import settings
 from subcribe2.models import SubcribeModel
 from datetime import datetime
+from chatbot.models import ChatbotItemModel
 # Create your views here.
 
 def list_events(request):
@@ -129,6 +130,11 @@ def edit(request,id):
 @login_required(login_url=settings.LOGIN_URL)
 def delete(request,id):
     model = EventModel.objects.get(id=id)
+    chatbot = ChatbotItemModel.objects.all()
+    for item in chatbot:
+        if item.event.id == id:
+       
+            item.delete()
     model.delete()
     return redirect("home:list_events")
 
