@@ -9,7 +9,7 @@ from .models import User, EventModel, ChatbotModel
 import openai
 
 def chatbot(request):
-    API_KEY = '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'
+    API_KEY = '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'
     openai.api_key = API_KEY
     user = User.objects.get(username=request.user.username)
     events = EventModel.objects.all()
@@ -18,21 +18,22 @@ def chatbot(request):
     if not question:
         question = 'Can you help me with something?'
 
-    # Lấy lịch sử câu hỏi và câu trả lời từ cơ sở dữ liệu
     chat_history = ChatbotModel.objects.filter(user=user)
     
     chat_history_text = '\n'.join([f"Q: {item.question}\nA: {item.answer}\n" for item in chat_history])
 
-    # Kết hợp câu hỏi mới với lịch sử chat
-    prompt = f"{chat_history_text}\nUser: {question}\nChatbot:"
+    conversation = [
+    {"role": "system", "content": "You are a helpful assistant."},
+    {"role": "user", "content": f"{chat_history_text}\nUser:{question}\nChatbot:"}
+    ]
 
-    chatbot = openai.Completion.create(
-        model='text-davinci-003',
-        prompt=prompt,
+    chatbot = openai.ChatCompletion.create(
+        model='gpt-3.5-turbo',
+        messages=conversation,
         max_tokens=100
     )
-    
-    answer = chatbot.choices[0]['text']
+    answer = chatbot.choices[0]['message']['content']
+
 
     # Lưu trữ câu hỏi mới và câu trả lời vào cơ sở dữ liệu
     output, created = ChatbotModel.objects.get_or_create(
@@ -53,7 +54,7 @@ def chatbot(request):
 
 
 def chatbotitem(request,id):
-    API_KEY = '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'
+    API_KEY = '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'
     user = User.objects.get(username=request.user.username)
     event = EventModel.objects.get(id=id)
     date = str(event.date)
@@ -73,15 +74,17 @@ def chatbotitem(request,id):
         event=event
     )
     chat_history_text = "/n".join([f"Q:{item.question}\nA:{item.answer}" for item in chatbot_list])
-    prompt = f"{chat_history_text}\nUser:{question}\nChatbot:"
+    conversation = [
+        {"role": "system", "content": "You are a helpful assistant."},
+        {"role": "user", "content": f"{chat_history_text}\nUser:{question}\nChatbot:"}
+    ]
 
-    chat_ai = openai.Completion.create(
-        model = 'text-davinci-003',     
-        prompt = prompt,
-        max_tokens = 1000
+    chat_ai = openai.ChatCompletion.create(
+        model='gpt-3.5-turbo',
+        messages=conversation,
+        max_tokens=100
     )
-
-    answer = chat_ai.choices[0]['text']
+    answer = chat_ai.choices[0]['message']['content']
     model, created = ChatbotItemModel.objects.get_or_create(
         order = order,
         user=user,
