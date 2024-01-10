@@ -52,10 +52,10 @@ def list_events(request):
  
 
     # thời gian sự kiện kết thúc
-    for item in events:
-        if item.deadlinedate == current_date and item.deadlinetime < current_time:
-            item.is_completed = True
-            item.save()
+    # for item in events:
+    #     if item.deadlinedate == current_date and item.deadlinetime < current_time:
+    #         item.is_completed = True
+    #         item.save()
     # tìm kiếm 
     if keyword:
         events = EventModel.objects.filter(
@@ -94,9 +94,9 @@ def main(request):
 @login_required(login_url=settings.LOGIN_URL)
 def add(request):
     user = User.objects.get(username=request.user.username)
-    form = EventFormModel(initial={"user":user})
+    form = EventFormModel(initial={"user":user,"totalpeople":0})
     if request.method == "POST":
-        form = EventFormModel(initial={"user":user})
+        form = EventFormModel(initial={"user":user,"totalpeople":0})
         
         form = EventFormModel(request.POST, request.FILES)
         if form.is_valid():
@@ -139,7 +139,11 @@ def delete(request,id):
     return redirect("home:list_events")
 
 def test(request):
-    return render(request,"home/test.html")
+    model = SubcribeModel.objects.all()
+    context = {
+        'model':model,
+    }
+    return render(request,"home/test.html",context)
 @login_required(login_url=settings.LOGIN_URL)
 def subcribe2(request,id):
     user = User.objects.get(username=request.user.username)

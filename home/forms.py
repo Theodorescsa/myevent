@@ -27,4 +27,4 @@ class EventFormModel(forms.ModelForm):
     class Meta():
         model = EventModel
         fields = '__all__'
-        widgets = {'user':forms.HiddenInput()}
+        widgets = {'user':forms.HiddenInput(),'totalpeople':forms.HiddenInput()}

@@ -1,13 +1,8 @@
 {% extends 'home/base.html' %}
 {% block content %}
-<div class="contact-us">
-    <form>
-        <input placeholder="Name" type="text" required="">
-        <input placeholder="Email" type="email" name="customerEmail" required="">
-        <input placeholder="Phone" type="tel" name="customerPhone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required="">
-        <button type="submit">SIGN UP</button>
-    </form>
-      
-  </div>
+{% for item in model %}
+{{item.id}}-{{item.status}}-{{item.user.id}}-{{item.event.id}}
+<br>
+{% endfor %}
 
 {% endblock content %}
