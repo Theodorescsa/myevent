@@ -28,6 +28,10 @@ def list_events(request):
         event_total = SubcribeModel.objects.filter(event__id=num_id,status = 1)
         
         total = event_total.count()
+        if total == 0:
+            event = EventModel.objects.get(id=num_id)
+            event.totalpeople = total
+            event.save()
         for item in event_total:
             item.event.totalpeople = total
             list_dict.append({item.event.id: item.event.totalpeople})
