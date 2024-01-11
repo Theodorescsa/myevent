@@ -34,7 +34,6 @@ def chatbot(request):
         list_events.append(item.topic)
         list_events.append(item.is_completed)
     list_events_converted = [str(x) if x is not None else '' for x in list_events]
-    print(list_events_converted)
         
         
         
