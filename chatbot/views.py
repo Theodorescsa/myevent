@@ -9,22 +9,38 @@ from .models import User, EventModel, ChatbotModel
 import openai
 
 def chatbot(request):
-    API_KEY = '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'
+    API_KEY = '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'
     openai.api_key = API_KEY
     user = User.objects.get(username=request.user.username)
     events = EventModel.objects.all()
     question = request.POST.get('question', '')
-
+    list_events = []
     if not question:
         question = 'Can you help me with something?'
 
     chat_history = ChatbotModel.objects.filter(user=user)
     
     chat_history_text = '\n'.join([f"Q: {item.question}\nA: {item.answer}\n" for item in chat_history])
-
+    for item in events:
+        list_events.append(item.leader)
+        list_events.append(item.name)
+        list_events.append(item.description)
+        list_events.append(item.date)
+        list_events.append(item.time)
+        list_events.append(item.totalpeople)
+        list_events.append(item.deadlinedate)
+        list_events.append(item.deadlinetime)
+        list_events.append(item.address)
+        list_events.append(item.topic)
+        list_events.append(item.is_completed)
+    list_events_converted = [str(x) if x is not None else '' for x in list_events]
+    print(list_events_converted)
+        
+        
+        
     conversation = [
     {"role": "system", "content": "You are a helpful assistant."},
-    {"role": "user", "content": f"{chat_history_text}\nUser:{question}\nChatbot:"}
+    {"role": "user", "content": f"List events:{list_events_converted}\n{chat_history_text}\nUser:{question}\nChatbot:"}
     ]
 
     chatbot = openai.ChatCompletion.create(
@@ -54,7 +70,7 @@ def chatbot(request):
 
 
 def chatbotitem(request,id):
-    API_KEY = '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'
+    API_KEY = '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'
     user = User.objects.get(username=request.user.username)
     event = EventModel.objects.get(id=id)
     date = str(event.date)
