@@ -38,7 +38,6 @@ def list_events(request):
 
             # print(f"{item.event.name} đang có {item.event.totalpeople} đang tham gia")
             item.save()
-    print(list_dict)
     if list_dict == []:
         for item in list_event_id:
             event = EventModel.objects.get(id=item)
