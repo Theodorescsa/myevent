@@ -27,6 +27,8 @@ urlpatterns = [
     path('logout/', include('logout2.urls')),
     path('subcribe/', include('subcribe2.urls')),
     path('chatbot/', include('chatbot.urls')),
+    path('login/', include('loginapp.urls')),
+    
     
     
     

@@ -43,6 +43,8 @@ INSTALLED_APPS = [
     'logout2',
     'subcribe2',
     'chatbot',
+    'social_django',
+    'loginapp',
 ]
 
 MIDDLEWARE = [
@@ -53,7 +55,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-]
+    'social_django.middleware.SocialAuthExceptionMiddleware',]
 
 ROOT_URLCONF = 'myevent.urls'
 
@@ -68,6 +70,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',
             ],
         },
     },
@@ -136,4 +139,16 @@ MEDIA_URL = '/media/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_URL = "/signin/"
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.facebook.FacebookAppOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+SOCIAL_AUTH_URL_NAMESPACE = "social"
 
+SOCIAL_AUTH_FACEBOOK_KEY = "338759978965120"
+SOCIAL_AUTH_FACEBOOK_SECRET = "02e46e50cb0b7dfcf97d7653113d4506"
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = [
+    'email',
+]
