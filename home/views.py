@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, HttpResponse
-from .models import EventModel
+from .models import EventModel, RoomEventModel, MessageEventModel
 from .forms import EventForm, EventFormModel
 from django.contrib.auth.models import User
 from django.db.models import Q
@@ -199,3 +199,24 @@ def unsubcribe(request, id):
   
         return redirect("home:subcribed")
 
+def index(request, id):
+    event = EventModel.objects.get(id=id)
+    room_name = id
+    context = {
+        'room_name':room_name,
+    }
+    return render(request, "home/roomIndex.html", context)
+def room(request, room_name):
+    user = User.objects.get(username = request.user.username)
+    room, created = RoomEventModel.objects.get_or_create(
+        room_name = room_name,
+        user = user,
+    )
+    room_get = RoomEventModel.objects.get(room_name=room_name)
+    messages = MessageEventModel.objects.filter(room=room_get)
+
+    context = {
+        "room_name": room_name,
+        "messages":messages,
+    }
+    return render(request, "home/room.html", context)

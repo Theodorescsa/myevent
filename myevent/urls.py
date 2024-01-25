@@ -28,8 +28,8 @@ urlpatterns = [
     path('subcribe/', include('subcribe2.urls')),
     path('chatbot/', include('chatbot.urls')),
     path('login/', include('loginapp.urls')),
-    
-    
+    # path("chat/", include("chat.urls")),
+
     
     
     

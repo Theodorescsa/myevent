@@ -15,6 +15,8 @@ urlpatterns = [
     path("subcribe/<int:id>/",views.subcribe2,name='subcribe2'),
     path("subcribed/",views.didsubcribed,name='subcribed'),
     path("unsubcribe/<int:id>/",views.unsubcribe,name='unsubcribe'),
+    path("createroom/<int:id>/", views.index, name="index"),
+    path("<str:room_name>/", views.room, name="room"),
 
       
     

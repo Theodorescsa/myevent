@@ -9,7 +9,7 @@ from .models import User, EventModel, ChatbotModel
 import openai
 
 def chatbot(request):
-    API_KEY = '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'
+    API_KEY = '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'
     openai.api_key = API_KEY
     user = User.objects.get(username=request.user.username)
     events = EventModel.objects.all()
@@ -69,7 +69,7 @@ def chatbot(request):
 
 
 def chatbotitem(request,id):
-    API_KEY = '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'
+    API_KEY = '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'
     user = User.objects.get(username=request.user.username)
     event = EventModel.objects.get(id=id)
     date = str(event.date)
